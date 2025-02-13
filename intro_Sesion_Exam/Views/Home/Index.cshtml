@@ -1,8 +1,24 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using System.Text.Json
+
+@{
+  ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+  <h1 class="display-4">Welcome</h1>
+  <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+@* @{
+  //var x = HttpContext.Session.GetString("user");
+  var userName = Context.Session.GetString("user");
+}
+<h1>Hoş geldin, @userName</h1> *@
+
+@{
+  var userName = Context.Session.GetString("userJson");
+  var girisyapan = JsonSerializer.Deserialize<UserModel>(userName);
+
+  
+}
+<h1>Hoş geldin, @girisyapan.Name @girisyapan.Surname</h1>
